@@ -1,0 +1,4 @@
+http://www.kenyajoblist.com/rss/all/
+https://ngojobsinafrica.com/media-rss/?country=kenya
+https://jobs.undp.org/rss_feeds/KEN.xml
+https://www.myjobmag.co.ke/jobsxml.xml
