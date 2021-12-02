@@ -8,3 +8,9 @@ __pycache__/
 *$py.class
 .vscode
 
+config.py
+config.json
+bot.py
+heheh.py
+post.py
+hello.py

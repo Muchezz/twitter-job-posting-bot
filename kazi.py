@@ -1,8 +1,14 @@
-import feedparser, pprint,requests, datetime, time, json, os, sys, time
+import feedparser, pprint,requests, datetime, time, json, os, sys, time, random, tweepy
 from datetime import datetime, timezone, timedelta, date
 from time import gmtime
+from  config import *
 
 TIMELIMIT = 90000 # Around 25 hours
+
+def get_api():
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    return tweepy.API(auth)
 
 
 def check_if_offer_is_valid(entry):
@@ -58,6 +64,7 @@ def get_ngo_offers():
             'link': offer.get('link')
         }
     for offer in offers]
+    
 
 
 def main():
@@ -77,6 +84,25 @@ def main():
             
         )
 
-    return offers
+    # Get the hashtag from a file
+    with open('hashtag.txt', 'r') as f:
+        hashtag = f.readlines()
+
+    # Remove the newline character
+    hashtag = [x.strip() for x in hashtag]
+
+  
+    # Get the API
+    api = get_api()
+
+    # Post the itens from the list
+    for offer in offers:
+        # Post the tweet
+        api.update_status(offer + ' '+ hashtag[0] + ' ' + hashtag[1])
+        # Sleep for a random time between 1 and 5 minutes
+        print('Sleeping for a random time between 1 and 3 minutes')
+        time.sleep(random.randint(60, 180))
+    print('Done')
      
-print (main())
+if __name__ == '__main__':
+    main()
