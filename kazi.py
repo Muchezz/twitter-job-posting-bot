@@ -8,7 +8,7 @@ TIMELIMIT = 90000 # Around 25 hours
 def get_api():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    return tweepy.API(auth)
+    return tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 
 def check_if_offer_is_valid(entry):
