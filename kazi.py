@@ -59,7 +59,7 @@ def get_ngo_offers():
     return [
         {
             'title': offer.get('title'),
-            'company': offer.get('company'),
+            #'company': offer.get('job:company'),
             'date': datetime.strptime(offer.get('published'), '%a, %d %b %Y %H:%M:%S %z').strftime('%d-%m-%Y'),
             'link': offer.get('link')
         }
@@ -72,18 +72,19 @@ def main():
     ngojobsinafrica = get_ngo_offers()
     
 
-    raw_offers = myjobmag + ngojobsinafrica 
+    raw_offers = ngojobsinafrica  + myjobmag  # Combine both sources
 
     offers = []
     for offer in raw_offers:
         offers.append(
-            f'Role: *{offer.get("title")}* \n'
-            f'Company: {offer.get("company")} \n'
-            f'Date: {offer.get("date")} \n'
+            f'Role: {offer.get("title")} \n'
+            f'industry: {offer.get("industry")} \n'
+            #f'Company: {offer.get("company")} \n'
+            f'Date Posted: {offer.get("date")} \n'
             f'Link: {offer.get("link")} \n'
             
         )
-
+    
     # Get the hashtag from a file
     with open('hashtag.txt', 'r') as f:
         hashtag = f.readlines()
@@ -100,9 +101,10 @@ def main():
         # Post the tweet
         api.update_status(offer + ' '+ hashtag[0] + ' ' + hashtag[1])
         # Sleep for a random time between 1 and 5 minutes
-        print('Sleeping for a random time between 1 and 3 minutes')
-        time.sleep(random.randint(60, 180))
+        print('Sleeping for a random time between 1 and 5 minutes')
+        time.sleep(random.randint(60, 300))
     print('Done')
-     
+
+
 if __name__ == '__main__':
     main()
