@@ -21,7 +21,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pytest kazi.py
+            pylint kazi.py
            
       - save_cache:
           paths:
