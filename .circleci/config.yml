@@ -6,9 +6,9 @@ parameters:
     default: python:3.10.0-bullseye 
 
 jobs:
-  test:
+  linting:
     docker:
-      - image: << parameter docker_image >>
+      - image: << pipeline.parameters.docker_image >>
     
     steps:
       - checkout
@@ -16,7 +16,6 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             
-            - v1-dependencies-
       - run:
           name: install dependencies
           command: |
@@ -47,7 +46,7 @@ workflows:
   version: 2
   commit:
     jobs:
-      - test
+      - linting
       
   nightly:
     triggers: #use the triggers key to indicate a scheduled build
