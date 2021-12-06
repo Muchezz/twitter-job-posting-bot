@@ -1,6 +1,5 @@
 from datetime import datetime, timezone
-from time import gmtime
-import feedparser,  datetime, time,  time, random, tweepy
+import time, random, feedparser, tweepy
 from  config import *
 
 TIMELIMIT = 90000 # Around 25 hours
