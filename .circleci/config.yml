@@ -22,7 +22,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            pylint kazi.py
+            pylint --disable=E0602,C0116,C0103    kazi.py
            
       - save_cache:
           paths:

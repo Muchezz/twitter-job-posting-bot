@@ -1,6 +1,6 @@
-import feedparser, pprint,requests, datetime, time, json, os, sys, time, random, tweepy
-from datetime import datetime, timezone, timedelta, date
+from datetime import datetime, timezone
 from time import gmtime
+import feedparser,  datetime, time,  time, random, tweepy
 from  config import *
 
 TIMELIMIT = 90000 # Around 25 hours
