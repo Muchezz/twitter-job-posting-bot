@@ -52,7 +52,9 @@ workflows:
     triggers: #use the triggers key to indicate a scheduled build
       - schedule:
           cron: "0 8 * * *" # use cron syntax to set the schedule
-          branch: main
+          filters:
+            branches:
+              only: main
           
     jobs:
       - coverage
