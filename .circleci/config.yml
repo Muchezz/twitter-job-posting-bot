@@ -30,7 +30,7 @@ jobs:
 
   coverage:
     docker:
-        - image: << parameter docker_image >>
+        - image: << pipeline.parameters.docker_image >>
     steps:
       - checkout
       - run:
