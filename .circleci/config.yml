@@ -1,0 +1,58 @@
+version: 2.1
+
+parameters:
+  docker_image:
+    type: string
+    default: python:3.10.0-bullseye 
+
+jobs:
+  test:
+    docker:
+      - image: << parameter docker_image >>
+    
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pytest kazi.py
+           
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+
+  coverage:
+    docker:
+        - image: << parameter docker_image >>
+    steps:
+      - checkout
+      - run:
+          name: run job
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            python3 kazi.py
+      
+
+      
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+      
+  nightly:
+    triggers: #use the triggers key to indicate a scheduled build
+      - schedule:
+          cron: "0 8 * * *" # use cron syntax to set the schedule
+          
+    jobs:
+      - coverage

@@ -8,7 +8,7 @@ TIMELIMIT = 90000 # Around 25 hours
 def get_api():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    return tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+    return tweepy.API(auth)
 
 
 def check_if_offer_is_valid(entry):
@@ -78,7 +78,7 @@ def main():
     for offer in raw_offers:
         offers.append(
             f'Role: {offer.get("title")} \n'
-            f'industry: {offer.get("industry")} \n'
+            f'Industry: {offer.get("industry")} \n'
             #f'Company: {offer.get("company")} \n'
             f'Date Posted: {offer.get("date")} \n'
             f'Link: {offer.get("link")} \n'
@@ -102,7 +102,7 @@ def main():
         api.update_status(offer + ' '+ hashtag[0] + ' ' + hashtag[1])
         # Sleep for a random time between 1 and 5 minutes
         print('Sleeping for a random time between 1 and 5 minutes')
-        time.sleep(random.randint(60, 300))
+        time.sleep(random.randint(60, 250))
     print('Done')
 
 
