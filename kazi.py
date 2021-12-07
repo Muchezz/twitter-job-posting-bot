@@ -100,7 +100,7 @@ def main():
         api.update_status(offer + ' '+ hashtag[0] + ' ' + hashtag[1])
         # Sleep for a random time between 1 and 5 minutes
         print('Sleeping for a random time between 1 and 5 minutes')
-        time.sleep(random.randint(60, 250))
+        time.sleep(random.randint(60, 200))
     print('Done')
 
 
