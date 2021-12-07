@@ -1,12 +1,14 @@
 from datetime import datetime, timezone
 import time, random, feedparser, tweepy
-from  config import *
+import sys
+from os import environ
+# from  config import *
 
 TIMELIMIT = 90000 # Around 25 hours
 
 def get_api():
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = tweepy.OAuthHandler(environ['consumer_key'], environ['consumer_secret'])
+    auth.set_access_token(environ['access_token'], environ['access_token_secret'])
     return tweepy.API(auth)
 
 
