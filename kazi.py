@@ -21,7 +21,6 @@ def check_if_offer_is_valid(entry):
     return True
 
 def get_myjobmag_offers():
-    
     rss = feedparser.parse('https://www.myjobmag.co.ke/jobsxml.xml')
     entries = rss.entries
     offers = [e for e in entries if check_if_offer_is_valid(e) is True]
